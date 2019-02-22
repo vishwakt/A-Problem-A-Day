@@ -97,7 +97,7 @@ class LinkedList:
         temp = None
 
     def delete_node_at_position(self, position):
-
+        """Delete node at given position"""
         if self.head is None:
             return
 
@@ -122,25 +122,113 @@ class LinkedList:
         temp.next = next
 
     def delete_linked_list(self):
+        """Delete linked list"""
         current = self.head
         while self.head is not None:
             self.head = self.head.next
             del current
             current = self.head
 
-        del current
+        # del current
+
+    def length_of_list(self):
+        """Print length of linked list"""
+        reassign = self.head
+        count = 0
+        current = self.head
+        while self.head is not None:
+            self.head = self.head.next
+            count += 1
+            current = self.head
+        print "Length of linked list is:", count
+        self.head = reassign
+        return count
+
+    def search_an_element(self, element):
+        """Search for a given element in a linked list"""
+        current = self.head
+        count = 0
+        while current is not None:
+            count += 1
+            if current.data == element:
+                print "Element found at position:", count - 1
+                return
+            current = current.next
+        print "Element not found"
+
+    def get_nth_node(self, index):
+        """Get node at a given index in a linked list"""
+        current = self.head
+        count = 0
+
+        while current:
+            if count == index:
+                print current.data
+                return
+            else:
+                count += 1
+                current = current.next
+
+        print "Index doesn't exist"
+
+    def get_nth_from_last(self, index):
+        """Get nth element from the end of the linked list"""
+        print_index = self.length_of_list() - index - 1
+        self.get_nth_node(print_index)
+
+    def check_if_palindrome(self):
+        """Check if the data in the linked list is a palindrome"""
+        stack_of_data = list()
+        current = self.head
+        while current:
+            stack_of_data.append(current.data)
+            current = current.next
+        current = self.head
+        while current:
+            if stack_of_data.pop() != current.data:
+                print "Not a palindrome"
+                return
+            else:
+                current = current.next
+        print "It is a palindrome"
+
+    def swap_nodes(self, x, y):
+        """Swap nodes of a linked list"""
+        if x is y:
+            return
+
+        prevX = None
+        currX = self.head
+        while currX is not None and currX.data != x:
+            prevX = currX
+            currX = currX.next
+
+        prevY = None
+        currY = self.head
+        while currY is not None and currY.data != y:
+            prevY = currY
+            currY = currY.next
+
+        temp = currX.next
+        currX.next = currY.next
+        currY.next = temp
 
 
 if __name__ == "__main__":
     llist = LinkedList()
-    llist.add_first(1)
-    llist.add_last(2)
-    llist.add_last(3)
-    llist.add_last(4)
-    llist.add_last(5)
+    llist.add_first('a')
+    llist.add_last('b')
+    llist.add_last('c')
+    llist.add_last('c')
+    llist.add_last('b')
+    llist.add_last('a')
+    llist.swap_nodes('a', 'c')
+    # llist.insert_before(5, 4.5)
 
-    llist.insert_before(5, 4.5)
-    llist.delete_node_at_position(-1)
-
-    llist.delete_linked_list()
+    # llist.length_of_list()
+    # llist.search_an_element(3)
+    # llist.delete_linked_list()
+    # llist.get_nth_node(3)
+    # llist.get_nth_from_last(0)
+    # llist.check_if_palindrome()
     llist.print_list()
