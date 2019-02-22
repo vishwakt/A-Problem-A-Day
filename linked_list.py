@@ -121,6 +121,15 @@ class LinkedList:
         temp.next = None
         temp.next = next
 
+    def delete_linked_list(self):
+        current = self.head
+        while self.head is not None:
+            self.head = self.head.next
+            del current
+            current = self.head
+
+        del current
+
 
 if __name__ == "__main__":
     llist = LinkedList()
@@ -133,4 +142,5 @@ if __name__ == "__main__":
     llist.insert_before(5, 4.5)
     llist.delete_node_at_position(-1)
 
+    llist.delete_linked_list()
     llist.print_list()
