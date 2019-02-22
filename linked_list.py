@@ -66,9 +66,9 @@ class LinkedList:
             prev = temp
             temp = temp.next
 
-        if temp.next is None:
-            print "No such node exists"
-            return
+        # if temp.next is None:
+        #     print "No such node exists"
+
         prev.next = new_node
         new_node.next = temp
 
@@ -96,6 +96,31 @@ class LinkedList:
 
         temp = None
 
+    def delete_node_at_position(self, position):
+
+        if self.head is None:
+            return
+
+        temp = self.head
+
+        if position is 0:
+            self.head = temp.next
+            temp = None
+            return
+
+        for i in range(position-1):
+            temp = temp.next
+            if temp is None:
+                break
+
+        if temp is None or temp.next is None or position < 0:
+            print "Invalid position"
+            return
+
+        next = temp.next.next
+        temp.next = None
+        temp.next = next
+
 
 if __name__ == "__main__":
     llist = LinkedList()
@@ -105,7 +130,7 @@ if __name__ == "__main__":
     llist.add_last(4)
     llist.add_last(5)
 
-    llist.delete_node(6)
-    llist.insert_before(6, 4.5)
+    llist.insert_before(5, 4.5)
+    llist.delete_node_at_position(-1)
 
     llist.print_list()
