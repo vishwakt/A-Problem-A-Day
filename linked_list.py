@@ -213,22 +213,99 @@ class LinkedList:
         currX.next = currY.next
         currY.next = temp
 
+    def pairwise_swap(self):
+        """Pairwise swap elements in a linked list"""
+        temp = self.head
+        if temp is None:
+            return
+
+        while temp is not None and temp.next is not None:
+            temp.data, temp.next.data = temp.next.data, temp.data
+            temp = temp.next.next
+
+    def move_last_element_to_head(self):
+        """Move last element of linked list to head"""
+        last = self.head
+        sec_last = None
+        while last.next:
+            sec_last = last
+            last = sec_last.next
+
+        sec_last.next = None
+        last.next = self.head
+        self.head = last
+
+    def reverse_linked_list(self):
+        """Reverse complete linked list in an iterative approach"""
+        curr = self.head
+        prev = None
+        next = None
+
+        while curr:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+
+        self.head = prev
+        return
+
+    def reverse_k(self, head, k):
+        """Reverse linked list in groups of given size of k"""
+        curr = head
+        next = None
+        prev = None
+        count = 0
+
+        while curr is not None and count < k:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+            count += 1
+
+        if next is not None:
+            head.next = self.reverse_k(next, k)
+
+        return prev
+
+    def merge_list(self, head1, head2):
+        """A recursive approach to merge 2 given lists"""
+        temp = None
+        if head1 is Node:
+            return head2
+
+        if head2 is Node:
+            return head1
+
+        if head1 <= head2:
+            temp = head1
+            temp.next = self.merge_list(head1.next, head2)
+
+        if head1 >= head2:
+            temp = head2
+            temp.next = self.merge_list(head1, head2.next)
+
+        return temp
+
 
 if __name__ == "__main__":
     llist = LinkedList()
     llist.add_first('a')
     llist.add_last('b')
     llist.add_last('c')
-    llist.add_last('c')
-    llist.add_last('b')
-    llist.add_last('a')
-    llist.swap_nodes('a', 'c')
+    llist.add_last('d')
+    llist.add_last('e')
+    llist.add_last('f')
+    # llist.pairwise_swap()
     # llist.insert_before(5, 4.5)
-
     # llist.length_of_list()
     # llist.search_an_element(3)
     # llist.delete_linked_list()
     # llist.get_nth_node(3)
     # llist.get_nth_from_last(0)
     # llist.check_if_palindrome()
+    # llist.move_last_element_to_head()
+    # llist.reverse_linked_list()
+    llist.head = llist.reverse_k(llist.head, 3)
     llist.print_list()
