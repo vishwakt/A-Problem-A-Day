@@ -3,6 +3,7 @@ class Node:
         self.data = data
         self.next = None
 
+
 class Queue:
     def __init__(self):
         self.head = None
@@ -38,6 +39,23 @@ class Queue:
     def print_tail(self):
         print self.tail.data
 
+    def josephus_circle(self, n):
+        count = 0
+        prev = None
+        curr = self.head
+        while prev is not curr:
+            count += 1
+            prev = curr
+            curr = curr.next
+            if count == n:
+                prev.next = curr.next
+                curr = None
+                curr = prev.next
+                count = 0
+                # print self.print_queue()
+                # print prev.data, curr.data
+        print curr.data
+
 
 if __name__ == "__main__":
     q = Queue()
@@ -46,8 +64,9 @@ if __name__ == "__main__":
     q.enqueue(3)
     q.enqueue(4)
     q.enqueue(5)
-    q.dequeue()
+    # q.dequeue()
 
     q.print_queue()
-    q.print_head()
-    q.print_tail()
+    # q.print_head()
+    # q.print_tail()
+    q.josephus_circle(3)
