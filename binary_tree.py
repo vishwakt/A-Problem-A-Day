@@ -62,8 +62,8 @@ if __name__ == "__main__":
     bt.insert(5)
     bt.insert(4)
 
-    # bt.print_inorder(bt)
-    # bt.print_preorder(bt)
-    # bt.print_postorder(bt)
+    bt.print_inorder(bt)
+    bt.print_preorder(bt)
+    bt.print_postorder(bt)
 
     bt.print_postorder(bt)
