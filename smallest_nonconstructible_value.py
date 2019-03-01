@@ -1,8 +1,10 @@
+""" Time complexity of O(n log n) to sort and O(n) to iterate over the list"""
+
 def smallest_nonconstructible_value(list_):
     if list_ is []:
         return 0
     max_constructible_value = 0
-    for num in list_:
+    for num in sorted(list_):
         if num > max_constructible_value + 1:
             break
         else:
