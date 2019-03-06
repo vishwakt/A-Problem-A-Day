@@ -10,35 +10,37 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        if not headA or headB:
+        if not headA or not headB:
             return None
 
-        p = headA
-        while p.next:
-            p = p.next
+        hA = headA
+        while hA.next:
+            hA = hA.next
 
-        mark = p
-        mark.next = headA
+        tail = hA
+        tail.next = headA
 
         intersection = None
-        p1 = headB
-        p2 = headB
+        hb1 = headB
+        hb2 = headB
 
-        while p1 and p2:
-            p1 = p1.next
-            p2 = p2.next
-            if p2: p2 = p2.next
-            if p1 == p2: break
+        while hb1 and hb2:
+            hb1 = hb1.next
+            hb2 = hb2.next
+            if hb2:
+                hb2 = hb2.next
+            if hb1 == hb2:
+                break
 
-        if p1 and p2 and p1 == p2:
-            p1 = headB
-            while p1 != p2:
-                p1 = p1.next
-                p2 = p2.next
+        if hb1 and hb2 and hb1 == hb2:
+            hb1 = headB
+            while hb1 != hb2:
+                hb1 = hb1.next
+                hb2 = hb2.next
 
-            intersection = p1
+            intersection = hb1
 
-        mark.next = None
+        tail.next = None
 
         return intersection
 
