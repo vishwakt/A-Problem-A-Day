@@ -22,4 +22,4 @@ class Solution(object):
 
 if __name__ == "__main__":
     s = Solution()
-    print s.licenseKeyFormatting("5F3Z-2e-9-wa", 4)
+    print s.licenseKeyFormatting("5F3Z-2e-9-wcnjsda7a", 4)
