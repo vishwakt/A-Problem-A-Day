@@ -6,15 +6,15 @@ class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         print(intervals)
         heap = [] # stores end times
-        intervals.sort(key = lambda x: x.start)
+        intervals.sort(key = lambda x: x[0])
 
         for i in intervals:
-            if heap and i.start >= heap[0]:
+            if heap and i[0] >= heap[0]:
                 # 2 intervals can use same room
-                heapq.heapreplace(heap, i.end)
+                heapq.heapreplace(heap, i[1])
             else:
                 # allocate new room
-                heap.heappush(heap, i.end)
+                heapq.heappush(heap, i[1])
 
         return len(heap)
 
