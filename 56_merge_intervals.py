@@ -11,7 +11,7 @@ class Solution:
             if res and i[0] <= res[-1][1]:
                 res[-1][1] = max(i[1], res[-1][1])
             else:
-                res += [i]
+                res.append(i)
         return res
 
 
