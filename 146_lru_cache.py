@@ -1,20 +1,13 @@
 import collections
 
 
-class LRUCache(object):
+class LRUCache:
 
-    def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
+    def __init__(self, capacity: int):
         self.capacity = capacity
         self.cache = collections.OrderedDict()
 
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
+    def get(self, key: int) -> int:
         if key not in self.cache:
             return -1
         else:
@@ -22,12 +15,7 @@ class LRUCache(object):
             self.cache[key] = element
             return element
 
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: None
-        """
+    def put(self, key: int, value: int) -> None:
         if key in self.cache:
             self.cache.pop(key)
         else:
