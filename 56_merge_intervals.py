@@ -4,15 +4,17 @@ from typing import List
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         print(intervals)
-        res = []
         intervals.sort(key=lambda x: x[0])
+        output = [intervals[0]]
 
-        for i in intervals:
-            if res and i[0] <= res[-1][1]:
-                res[-1][1] = max(i[1], res[-1][1])
+        for start, end in intervals[1:]:
+            lastEnd = output[-1][1]
+            if start <= lastEnd:
+                output[-1][1] = max(lastEnd, end)
             else:
-                res.append(i)
-        return res
+                output.append([start, end])
+
+        return output
 
 
 if __name__ == "__main__":
