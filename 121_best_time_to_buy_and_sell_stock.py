@@ -1,22 +1,22 @@
-class Solution(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        if len(prices) == 0:
-            return 0
+from typing import List
 
-        max_to_here = 0
-        max_so_far = 0
 
-        for i in xrange(1, len(prices)):
-            max_to_here = max(0, max_to_here + prices[i] - prices[i-1])
-            max_so_far = max(max_so_far, max_to_here)
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        left, right = 0, 1
+        maxPrice = 0
 
-        return max_so_far
+        while right < len(prices):
+            if prices[left] < prices[right]:
+                profit = prices[right] - prices[left]
+                maxPrice = max(profit, maxPrice)
+            else:
+                left = right
+            right += 1
+
+        return maxPrice
 
 
 if __name__ == "__main__":
     s = Solution()
-    print s.maxProfit([7,1,5,3,6,4])
+    print(s.maxProfit([7,1,5,3,6,4]))
