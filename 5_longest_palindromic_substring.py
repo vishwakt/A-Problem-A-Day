@@ -1,30 +1,27 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        lenOfString = len(s)
-        answer = ''
-        maxLength = 0
-        DP = [[0]*lenOfString for _ in range(lenOfString)]
+        result = ""
+        resultLen = 0
+        for i in range(len(s)):
+            # odd case
+            left, right = i, i
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if (right - left + 1) > resultLen:
+                    result = s[left:right+1]
+                    resultLen = right - left + 1
+                left -= 1
+                right += 1
 
-        for i in range(lenOfString):
-            DP[i][i] = True
-            maxLength = 1
-            answer = s[i]
+            # even case
+            left, right = i, i+1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if(right - left + 1) > resultLen:
+                    result = s[left:right+1]
+                    resultLen = right - left + 1
+                left -= 1
+                right += 1
 
-        for i in range(lenOfString-1):
-            if s[i] == s[i+1]:
-                DP[i][i+1] = True
-                maxLength = 2
-                answer = s[i:i+2]
-
-        for j in range(lenOfString):
-            for i in range(0, j-1):
-                if s[i] == s[j] and DP[i+1][j-1]:
-                    DP[i][j] = True
-                    if maxLength < j - i +1:
-                        maxLength = j - i + 1
-                        answer = s[i:j+1]
-
-        return answer
+        return result
 
 
 if __name__ == "__main__":
