@@ -1,17 +1,18 @@
-class Solution(object):
-    def reorderLogFiles(self, logs):
-        """
-        :type logs: List[str]
-        :rtype: List[str]
-        """
-        letters, digits = [], []
+from typing import List
+
+
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        letters = []
+        digits = []
+
         for log in logs:
             if log.split()[1].isdigit():
                 digits.append(log)
             else:
                 letters.append(log)
 
-        # Suffix is tie, sort by identifier
+        # Suffix is a tie, sort by identifier
         letters.sort(key=lambda x: x.split()[0])
 
         # Sort by suffix
